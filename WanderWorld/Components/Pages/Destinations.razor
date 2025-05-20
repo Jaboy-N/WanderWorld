@@ -1,0 +1,39 @@
+﻿@page "/Destination"
+
+<h3>Destinations</h3>
+
+<style>
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+        .image-grid img {
+            width: 50%;
+            height: auto;
+            cursor: pointer;
+        }
+</style>
+
+<div class="image-grid">
+    @foreach (var image in Images)
+    {
+        <a href="/DestinationDetails?image=@image">
+            <img src="@image" alt="Image" />
+        </a>
+    }
+</div>
+
+@code {
+    private List<string> Images = new List<string>
+    {
+        "WanderWorld logo only.png",
+        "Dubai.png",
+        "Australia.png",
+        "Thailand.png",
+        "London.png"
+    };
+}
+
+

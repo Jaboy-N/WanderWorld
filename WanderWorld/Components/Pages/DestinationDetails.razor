@@ -1,0 +1,39 @@
+﻿@page "/DestinationDetails"
+
+@inject NavigationManager NavManager
+
+<h3>Destination Details</h3>
+
+@if (!string.IsNullOrEmpty(DestinationName))
+{
+    <p>@GetDestinationDescription(DestinationName)</p>
+}
+else
+{
+    <p>No destination selected.</p>
+}
+
+@code {
+    private string? DestinationName { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var uri = NavManager.Uri;
+        var queryParams = new Uri(uri).Query;
+        var queryDictionary = System.Web.HttpUtility.ParseQueryString(queryParams);
+        DestinationName = System.IO.Path.GetFileNameWithoutExtension(queryDictionary["image"]);
+    }
+
+    private string GetDestinationDescription(string name)
+    {
+        var descriptions = new Dictionary<string, string>
+        {
+            { "Dubai", "Dubai is a futuristic metropolis known for its stunning skyscrapers, luxurious shopping, and vibrant nightlife." },
+            { "Australia", "Australia is a land of breathtaking landscapes, unique wildlife, and iconic landmarks like the Sydney Opera House." },
+            { "Thailand", "Thailand is famous for its rich culture, beautiful beaches, and delicious street food." },
+            { "London", "London is a historic city with iconic sights like Big Ben, Buckingham Palace, and the Tower of London." }
+        };
+
+        return descriptions.ContainsKey(name) ? descriptions[name] : "Explore the wonders of this destination!";
+    }
+}
