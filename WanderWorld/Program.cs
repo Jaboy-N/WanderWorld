@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WanderWorld.Data;
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContextFactory<EmployeeMangerContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeMangerContext") ?? throw new InvalidOperationException("Connection string 'EmployeeMangerContext' not found.")));
@@ -36,3 +37,5 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
+
+
